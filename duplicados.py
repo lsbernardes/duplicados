@@ -11,6 +11,9 @@ except:
     print('Pacote "tqdm" não instalado. Instale o pacote por meio do seguinte comando: pip install tqdm')
     sys.exit()
 
+# Por quantos dias um arquivo JSON correspondente a uma pasta não deve ser atualizado?
+DIAS = 7
+
 class duplicados():
     def __init__(self, pasta):
         self.DIR = pasta
@@ -81,7 +84,7 @@ class duplicados():
     def update(self):
         ''' Atualiza o arquivo JSON no caso dele já existir no diretório '''
 
-        if (dt.datetime.now() - dt.datetime.fromtimestamp(self.LAST)).days <= 7:
+        if DIAS != 0  or (dt.datetime.now() - dt.datetime.fromtimestamp(self.LAST)).days <= DIAS:
             print('Arquivo JSON recente')
         else:
             print('Atualizando JSON...')
